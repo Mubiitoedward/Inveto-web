@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\StockSubCategory;
 use App\Models\StockCategory;
-
+use App\Models\Utils;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,6 +16,8 @@ use App\Models\StockCategory;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('auth/register',[ApiController::class,'register']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -43,7 +46,7 @@ Route::get('/stock-sub-categories', function (Request $request) {
 
    $data = [];
     foreach($subCategories as $subCategory){
-        dd($subCategories->StockCategory);
+        dd($subCategories);
          $data[] = [
               'id' => $subCategory->id,
               'text' => $subCategory->name,
