@@ -18,6 +18,7 @@ use App\Models\Utils;
 */
 
 Route::post('auth/register',[ApiController::class,'register']);
+Route::post('auth/login',[ApiController::class,'login']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

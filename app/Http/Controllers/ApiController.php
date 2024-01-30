@@ -14,6 +14,47 @@ use Illuminate\Support\Facades\DB;
 
 class ApiController extends BaseController
 {
+
+
+    public function Login(Request $request){
+      
+        if($request->email==null){
+            Utilities::error('email is required');
+        }
+        // if(!filter_var($request->email==null, FILTER_VALIDATE_EMAIL)){
+        //     Utilities::error('email is invalid');
+        // }
+    
+        if($request->password==null){
+            Utilities::error('Password is required');
+        }
+        
+        $user = User::where($request->email)->first();
+        if($user==null){
+            Utilities::error("Account Not Found");
+        }
+        if(password_verify($request->password, $user->password)==false){
+            Utilities::error("Invalid Password");
+        }
+
+        $company=Company::find($user->company_id);
+        if($company == null){
+            Utilities::error("company not found");
+        }
+
+        Utilities::success([
+            'user'=>$user,
+            'company'=>$company,
+            
+        ],"Login Successful",);
+
+
+
+    
+    }
+
+
+
    public function Register(Request $request){
     if($request->first_name==null){
         Utilities::error('first name is required');

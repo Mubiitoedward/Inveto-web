@@ -19,7 +19,7 @@ class Utilities{
             'message' => $message,
             'data' => $data,
         ]);
-        die();
+        // die();
     }
 
     public static function error($message)
@@ -31,7 +31,7 @@ class Utilities{
             'message' => $message,
             'data' => null,
         ]);
-        die();
+        
     }
 
 }
